@@ -9,6 +9,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: todo-password
       TZ: "UTC"
+    volumes:
+      - db_data:/var/lib/mysql
     ports:
       - 3306:3306
   api:
@@ -23,3 +25,5 @@ services:
       - ./backend:/myapp
     depends_on:
       - db
+volumes:
+  db_data:
