@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 services:
   db:
     image: ulife-share-db
@@ -10,14 +10,16 @@ services:
       MYSQL_ROOT_PASSWORD: todo-password
       TZ: "UTC"
     ports:
-      - "127.0.0.1:3306:3306"
-  api-server:
+      - 3306:3306
+  api:
     image: ulife-share-server
     container_name: ulife-share-server
     build:
       context: .
-      dockerfile: ./build/ulife-share/Dockerfile
+      dockerfile: ./build/api/dev/Dockerfile
     ports:
-      - "127.0.0.1:8080:8080"
+      - 8080:8080
+    volumes:
+      - ./backend:/myapp
     depends_on:
       - db

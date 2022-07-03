@@ -10,6 +10,6 @@ ARG GOOS=linux
 ARG GOARCH=amd64
 RUN go build -ldflags '-s -w' -o /build/main ./cmd/ulife-share
 
-FROM alpine
+FROM alpine:latest as prod
 COPY --from=builder /build/main /opt/app
 ENTRYPOINT ["/opt/app"]
