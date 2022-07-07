@@ -12,7 +12,7 @@ var dbmap *gorp.DbMap
 func init() {
 	var err error
 	dataSourceName := fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8",
-		"todo-app", "todo-password", "ulife-share-db:3306", "todo",
+		"admin", "password", "ulife-share-db:3306", "ulifeshare",
 	)
 	Db, err := sql.Open("mysql", dataSourceName)
 	if err != nil {

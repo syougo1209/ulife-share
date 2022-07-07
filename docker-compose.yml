@@ -1,16 +1,17 @@
 version: '3'
 services:
   db:
-    image: ulife-share-db
+    image: mysql:8.0
     container_name: ulife-share-db
-    build:
-      context: .
-      dockerfile: ./build/db/Dockerfile
     environment:
+      MYSQL_DATABASE: ulifeshare
       MYSQL_ROOT_PASSWORD: todo-password
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: password
       TZ: "UTC"
     volumes:
       - db_data:/var/lib/mysql
+      - ./build/db/my.cnf:/etc/mysql/conf.d/my.cnf
     ports:
       - 3306:3306
   api:
