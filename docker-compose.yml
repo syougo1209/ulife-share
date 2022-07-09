@@ -5,7 +5,7 @@ services:
     container_name: ulife-share-db
     environment:
       MYSQL_DATABASE: ulifeshare
-      MYSQL_ROOT_PASSWORD: todo-password
+      MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: admin
       MYSQL_PASSWORD: password
       TZ: "UTC"
