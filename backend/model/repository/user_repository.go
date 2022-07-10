@@ -17,7 +17,7 @@ func NewUserRepository() UserRepository {
 	return &UserRepository{}
 }
 
-func (ur *UserRepository) InsertUser(user entity.UserEntity) error {
+func (user_repository *UserRepository) InsertUser(user entity.UserEntity) error {
 	if err := dbmap.Insert(user); err != nil {
 		return errors.New(fmt.Sprintf("Error: %s", "insert user error"))
 	}
