@@ -10,14 +10,14 @@ import (
 type UserRepository interface {
 	InsertUser(user entity.UserEntity) error
 }
-type UserRepository struct {
+type userRepository struct {
 }
 
 func NewUserRepository() UserRepository {
-	return &UserRepository{}
+	return &userRepository{}
 }
 
-func (user_repository *UserRepository) InsertUser(user entity.UserEntity) error {
+func (ur *userRepository) InsertUser(user entity.UserEntity) error {
 	if err := dbmap.Insert(user); err != nil {
 		return errors.New(fmt.Sprintf("Error: %s", "insert user error"))
 	}
