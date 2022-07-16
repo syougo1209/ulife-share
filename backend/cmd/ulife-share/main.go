@@ -12,6 +12,5 @@ var uc = controller.NewUserController(ur)
 func main() {
 	router := gin.Default()
 	router.POST("/users", uc.PostUser)
-	router.GET("/users", uc.ReturnError)
 	router.Run(":8080")
 }
