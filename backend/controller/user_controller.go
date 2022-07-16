@@ -11,6 +11,7 @@ import (
 
 type UserController interface {
 	PostUser(c *gin.Context)
+	ReturnError(c *gin.Context)
 }
 
 type userController struct {
@@ -30,5 +31,8 @@ func (uc *userController) PostUser(c *gin.Context) {
 	if err := uc.ur.InsertUser(user); err != nil {
 		return
 	}
-	c.IndentedJSON(http.StatusCreated, {})
+	c.IndentedJSON(http.StatusCreated, user)
+}
+func (uc *userController) ReturnError(c *gin.Context) {
+	c.IndentedJSON(http.StatusNotFound, gin.H{"message": "album not found"})
 }
