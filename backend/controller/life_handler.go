@@ -1,7 +1,10 @@
 package controller
 
 import (
+	"encoding/json"
 	"net/http"
+
+	"github.com/syougo1209/ulife-share/model/entity"
 )
 
 type LifeHandler struct {
@@ -18,5 +21,10 @@ func NewLifeHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func (l *LifeHandler) FetchLife(w http.ResponseWriter, r *http.Request) {
-	var res []entity.life
+	var res []entity.LifeEntity
+	for i := 0; i < 5; i++ {
+		res = append(res, entity.LifeEntity{Id: i + 1, Content: "newcontent"})
+	}
+	output, _ := json.MarshalIndent(res, "", "\t\t")
+	w.Write(output)
 }
