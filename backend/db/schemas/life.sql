@@ -1,7 +1,6 @@
-CREATE TABLE `todo` (
+CREATE TABLE `life` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `title` varchar(40) COLLATE utf8mb4_bin NOT NULL,
-  `content` varchar(100) COLLATE utf8mb4_bin NOT NULL,
+  `content` varchar(200) COLLATE utf8mb4_bin NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
