@@ -3,14 +3,13 @@ package controller
 import (
 	"net/http"
 
-	"github.com/gin-gonic/gin"
 	"github.com/syougo1209/ulife-share/controller/dto"
 	"github.com/syougo1209/ulife-share/model/entity"
 	"github.com/syougo1209/ulife-share/model/repository"
 )
 
 type UserController interface {
-	PostUser(c *gin.Context)
+	PostUser()
 }
 
 type userController struct {
@@ -21,7 +20,7 @@ func NewUserController(ur repository.UserRepository) UserController {
 	return &userController{ur}
 }
 
-func (uc *userController) PostUser(c *gin.Context) {
+func (uc *userController) PostUser() {
 	var userRequest dto.UserRequest
 	if err := c.BindJSON(&userRequest); err != nil {
 		return
