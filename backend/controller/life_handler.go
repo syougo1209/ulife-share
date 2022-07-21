@@ -4,14 +4,14 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/syougo1209/ulife-share/model/entity"
+	application "github.com/syougo1209/ulife-share/application/usecase"
 )
 
 type lifeHandler struct {
-	LUsecase application.LifeUsecase
+	LUseCase application.LifeUseCase
 }
 
-func NewLifeHandler(w http.ResponseWriter, r *http.Request) {
+func NewLifeHandler(w http.ResponseWriter, r *http.Request, LUseCase application.LifeUseCase) {
 	handler := lifeHandler{}
 	switch r.Method {
 	case "GET":
@@ -22,10 +22,14 @@ func NewLifeHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func (l *lifeHandler) FetchLife(w http.ResponseWriter, r *http.Request) {
-	var res []entity.Life
-	for i := 0; i < 5; i++ {
-		res = append(res, entity.Life{Id: i + 1, Content: "newcontent"})
+	lifes, err := l.LUseCase.Fetch()
+	if err != nil {
+		w.WriteHeader(404)
+		return
 	}
-	output, _ := json.MarshalIndent(res, "", "\t\t")
-	w.Write(output)
+
+	res, _ := json.MarshalIndent(lifes, "", "\t\t")
+
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(res)
 }

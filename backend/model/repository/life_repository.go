@@ -1,4 +1,4 @@
-package repository
+package domain
 
 import (
 	"github.com/syougo1209/ulife-share/model/entity"

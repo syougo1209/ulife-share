@@ -5,12 +5,12 @@ import (
 	"time"
 
 	"github.com/syougo1209/ulife-share/model/entity"
-	"github.com/syougo1209/ulife-share/model/repository"
+	domain "github.com/syougo1209/ulife-share/model/repository"
 )
 
 type LifeRepository struct{}
 
-func NewLifeRepository() repository.LifeRepository {
+func NewLifeRepository() domain.LifeRepository {
 	return &LifeRepository{}
 }
 
