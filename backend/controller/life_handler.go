@@ -7,11 +7,12 @@ import (
 	"github.com/syougo1209/ulife-share/model/entity"
 )
 
-type LifeHandler struct {
+type lifeHandler struct {
+	LUsecase application.LifeUsecase
 }
 
 func NewLifeHandler(w http.ResponseWriter, r *http.Request) {
-	handler := LifeHandler{}
+	handler := lifeHandler{}
 	switch r.Method {
 	case "GET":
 		handler.FetchLife(w, r)
@@ -20,10 +21,10 @@ func NewLifeHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (l *LifeHandler) FetchLife(w http.ResponseWriter, r *http.Request) {
-	var res []entity.LifeEntity
+func (l *lifeHandler) FetchLife(w http.ResponseWriter, r *http.Request) {
+	var res []entity.Life
 	for i := 0; i < 5; i++ {
-		res = append(res, entity.LifeEntity{Id: i + 1, Content: "newcontent"})
+		res = append(res, entity.Life{Id: i + 1, Content: "newcontent"})
 	}
 	output, _ := json.MarshalIndent(res, "", "\t\t")
 	w.Write(output)
