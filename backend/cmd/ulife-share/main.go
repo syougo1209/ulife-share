@@ -15,9 +15,10 @@ func main() {
 
 	lifeRepo := datastore.NewLifeRepository()
 	lifeUC := application.NewLifeUseCase(lifeRepo)
-	lifeHandler := controller.NewLifeHandler(lifeUC)
 
-	http.HandleFunc("/lifes/", controller.NewLifeHandler)
+	http.HandleFunc("/lifes/", func(w http.ResponseWriter, r *http.Request) {
+		controller.NewLifeHandler(w, r, lifeUC)
+	})
 
 	server.ListenAndServe()
 }

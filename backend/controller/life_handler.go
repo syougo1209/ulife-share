@@ -12,7 +12,7 @@ type lifeHandler struct {
 }
 
 func NewLifeHandler(w http.ResponseWriter, r *http.Request, LUseCase application.LifeUseCase) {
-	handler := lifeHandler{}
+	handler := lifeHandler{LUseCase}
 	switch r.Method {
 	case "GET":
 		handler.FetchLife(w, r)

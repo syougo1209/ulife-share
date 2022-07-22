@@ -25,7 +25,7 @@ func (l *lifeUseCase) Fetch() ([]Output, error) {
 	if err != nil {
 		return nil, err
 	}
-	var lifesOutput []Output
+	lifesOutput := make([]Output, len(lifes))
 	for i, v := range lifes {
 		lifesOutput[i].Life = v
 	}
