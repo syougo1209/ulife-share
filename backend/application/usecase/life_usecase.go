@@ -1,23 +1,23 @@
 package application
 
 import (
-	"github.com/syougo1209/ulife-share/model/entity"
-	domain "github.com/syougo1209/ulife-share/model/repository"
+	model "github.com/syougo1209/ulife-share/domain/model"
+	repository "github.com/syougo1209/ulife-share/domain/repository"
 )
 
 type LifeUseCase interface {
 	Fetch() ([]Output, error)
 }
 type lifeUseCase struct {
-	lifeRepo domain.LifeRepository
+	lifeRepo repository.LifeRepository
 }
 
-func NewLifeUseCase(lr domain.LifeRepository) LifeUseCase {
+func NewLifeUseCase(lr repository.LifeRepository) LifeUseCase {
 	return &lifeUseCase{lr}
 }
 
 type Output struct {
-	Life entity.Life
+	Life model.Life
 }
 
 func (l *lifeUseCase) Fetch() ([]Output, error) {

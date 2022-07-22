@@ -4,8 +4,8 @@ import (
 	"net/http"
 
 	application "github.com/syougo1209/ulife-share/application/usecase"
-	"github.com/syougo1209/ulife-share/controller"
 	"github.com/syougo1209/ulife-share/infrastructure/datastore"
+	"github.com/syougo1209/ulife-share/interfaces/api/handler"
 )
 
 func main() {
@@ -17,7 +17,7 @@ func main() {
 	lifeUC := application.NewLifeUseCase(lifeRepo)
 
 	http.HandleFunc("/lifes/", func(w http.ResponseWriter, r *http.Request) {
-		controller.NewLifeHandler(w, r, lifeUC)
+		handler.NewLifeHandler(w, r, lifeUC)
 	})
 
 	server.ListenAndServe()

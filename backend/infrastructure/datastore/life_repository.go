@@ -4,25 +4,25 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/syougo1209/ulife-share/model/entity"
-	domain "github.com/syougo1209/ulife-share/model/repository"
+	"github.com/syougo1209/ulife-share/domain/model"
+	repository "github.com/syougo1209/ulife-share/domain/repository"
 )
 
 type LifeRepository struct{}
 
-func NewLifeRepository() domain.LifeRepository {
+func NewLifeRepository() repository.LifeRepository {
 	return &LifeRepository{}
 }
 
-func (l *LifeRepository) Fetch() ([]entity.Life, error) {
+func (l *LifeRepository) Fetch() ([]model.Life, error) {
 	var dto []lifeDTO
 	if _, err := dbmap.Select(&dto, "select * from life"); err != nil {
 		return nil, fmt.Errorf("LifeのFetch中にエラー発生: %w", err)
 	}
 
-	lifes := make([]entity.Life, len(dto))
+	lifes := make([]model.Life, len(dto))
 	for i, v := range dto {
-		lifes[i] = entity.Life{
+		lifes[i] = model.Life{
 			Id:        v.Id,
 			Content:   v.Content,
 			CreatedAt: v.CreatedAt,
