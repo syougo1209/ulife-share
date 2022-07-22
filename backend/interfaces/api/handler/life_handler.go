@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	application "github.com/syougo1209/ulife-share/application/usecase"
+	httputils "github.com/syougo1209/ulife-share/interfaces/api/handler/utils"
 )
 
 type lifeHandler struct {
@@ -24,7 +25,7 @@ func NewLifeHandler(w http.ResponseWriter, r *http.Request, LUseCase application
 func (l *lifeHandler) FetchLife(w http.ResponseWriter, r *http.Request) {
 	lifes, err := l.LUseCase.Fetch()
 	if err != nil {
-		w.WriteHeader(404)
+		w.WriteHeader(httputils.GetStatusCode(err))
 		return
 	}
 

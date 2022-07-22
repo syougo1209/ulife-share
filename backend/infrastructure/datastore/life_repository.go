@@ -1,7 +1,6 @@
 package datastore
 
 import (
-	"fmt"
 	"time"
 
 	"github.com/syougo1209/ulife-share/domain/model"
@@ -17,7 +16,7 @@ func NewLifeRepository() repository.LifeRepository {
 func (l *LifeRepository) Fetch() ([]model.Life, error) {
 	var dto []lifeDTO
 	if _, err := dbmap.Select(&dto, "select * from life"); err != nil {
-		return nil, fmt.Errorf("LifeのFetch中にエラー発生: %w", err)
+		return nil, model.ErrNotFound
 	}
 
 	lifes := make([]model.Life, len(dto))
