@@ -6,7 +6,7 @@ import (
 )
 
 type LifeUseCase interface {
-	Fetch() ([]Output, error)
+	Fetch() (FetchOutput, error)
 }
 type lifeUseCase struct {
 	lifeRepo repository.LifeRepository
@@ -16,18 +16,16 @@ func NewLifeUseCase(lr repository.LifeRepository) LifeUseCase {
 	return &lifeUseCase{lr}
 }
 
-type Output struct {
-	Life model.Life
-}
+type FetchOutput []model.Life
 
-func (l *lifeUseCase) Fetch() ([]Output, error) {
+func (l *lifeUseCase) Fetch() (FetchOutput, error) {
 	lifes, err := l.lifeRepo.Fetch()
 	if err != nil {
 		return nil, err
 	}
-	lifesOutput := make([]Output, len(lifes))
+	lifesOutput := make(FetchOutput, len(lifes))
 	for i, v := range lifes {
-		lifesOutput[i].Life = v
+		lifesOutput[i] = v
 	}
 	return lifesOutput, nil
 }
