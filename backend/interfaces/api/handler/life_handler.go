@@ -18,6 +18,8 @@ func NewLifeHandler(w http.ResponseWriter, r *http.Request, LUseCase application
 	switch r.Method {
 	case "GET":
 		handler.FetchLife(w, r)
+	case "POST":
+		handler.PostLife(w, r)
 	default:
 		w.WriteHeader(405)
 	}
@@ -36,6 +38,10 @@ func (l *lifeHandler) FetchLife(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(res)
+}
+
+func (l *lifeHandler) PostLife(w http.ResponseWriter, r *http.Request) {
+
 }
 
 func (l *lifeHandler) toFetchLifeJSON(lifes application.FetchOutput) fetchLifeJSON {
